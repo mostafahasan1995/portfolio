@@ -1,11 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  // Optimize for Windows performance
   swcMinify: true,
-  // Reduce file watching overhead on Windows
+  // Only apply webpack watch options in local development (not in Vercel builds)
   webpack: (config, { dev, isServer }) => {
-    if (dev && !isServer) {
+    // Only modify watch options in development on Windows (Vercel uses Linux)
+    if (dev && !isServer && typeof process !== 'undefined' && process.platform === 'win32') {
       config.watchOptions = {
         poll: 1000,
         aggregateTimeout: 300,
@@ -14,7 +14,6 @@ const nextConfig = {
     }
     return config
   },
-  // Disable source maps in development for faster builds (optional)
   productionBrowserSourceMaps: false,
 }
 
