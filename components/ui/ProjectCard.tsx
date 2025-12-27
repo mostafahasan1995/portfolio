@@ -26,15 +26,28 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
             target="_blank"
             rel="noopener noreferrer"
             className="text-primary dark:text-primary-dark hover:text-blue-700 dark:hover:text-blue-400 transition-colors"
+            aria-label={`Visit ${project.name} live site`}
           >
             <ExternalLink className="h-5 w-5" />
           </a>
         )}
       </div>
 
-      <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
-        {project.name}
-      </h3>
+      <div className="flex items-center justify-between mb-3">
+        <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+          {project.name}
+        </h3>
+        {project.link && (
+          <a
+            href={project.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs text-primary dark:text-primary-dark hover:underline font-medium"
+          >
+            Live Site →
+          </a>
+        )}
+      </div>
 
       <p className="text-gray-600 dark:text-gray-400 mb-4 flex-grow">
         {project.description}
