@@ -160,7 +160,7 @@ export function Contact() {
 
               {submitStatus === "success" && (
                 <p className="text-green-600 dark:text-green-400 text-sm text-center">
-                  Message sent successfully! I'll get back to you soon.
+                  Message sent successfully! I&apos;ll get back to you soon.
                 </p>
               )}
               {submitStatus === "error" && (
