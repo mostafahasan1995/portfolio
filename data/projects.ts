@@ -7,6 +7,24 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    name: "Neargami",
+    description: "Modern web platform featuring responsive design and interactive user experience. Built with modern frontend technologies and deployed to production.",
+    technologies: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
+    link: "https://www.neargami.com/",
+  },
+  {
+    name: "Imkan - LARSA Platform",
+    description: "Enterprise platform developed for LARSA Technologies. Features modern UI/UX with responsive design and optimized performance for production use.",
+    technologies: ["React", "Next.js", "TypeScript", "Frontend Development"],
+    link: "https://imkan.larsa.io/",
+  },
+  {
+    name: "Abraa.com - E-commerce Platform",
+    description: "Full-stack e-commerce marketplace platform serving the MENA region. Features product catalog, secure transactions, RFQ system, and multi-language support. Built from concept to production deployment.",
+    technologies: ["React", "Node.js", "Express.js", "MongoDB", "Payment Integration"],
+    link: "https://www.abraa.com/",
+  },
+  {
     name: "W2 Blockchain Educational Platform",
     description: "Backend infrastructure for blockchain learning platform using Node.js and Go, featuring interactive modules and real-time blockchain data integration.",
     technologies: ["Node.js", "Go", "PostgreSQL", "Web3.js"],
