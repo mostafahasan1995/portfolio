@@ -1,10 +1,13 @@
 "use client";
 
+import { useState } from "react";
 import { personal } from "@/data";
-import { Mail, Linkedin, Github, MapPin } from "lucide-react";
+import { Mail, Linkedin, Github, MapPin, FileText } from "lucide-react";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
+import { ResumeModal } from "@/components/ui/ResumeModal";
 
 export function Hero() {
+  const [isResumeOpen, setIsResumeOpen] = useState(false);
   return (
     <section
       id="home"
@@ -38,9 +41,17 @@ export function Hero() {
 
         <ScrollReveal delay={0.8}>
           <div className="flex flex-wrap items-center justify-center gap-4">
+            <button
+              onClick={() => setIsResumeOpen(true)}
+              className="inline-flex items-center space-x-2 bg-primary text-white px-6 py-3 rounded-lg hover:bg-blue-700 dark:bg-primary-dark dark:hover:bg-blue-600 transition-colors font-medium focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              aria-label="View Resume"
+            >
+              <FileText className="h-5 w-5" />
+              <span>View Resume</span>
+            </button>
             <a
               href={`mailto:${personal.email}`}
-              className="inline-flex items-center space-x-2 bg-primary text-white px-6 py-3 rounded-lg hover:bg-blue-700 dark:bg-primary-dark dark:hover:bg-blue-600 transition-colors font-medium focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              className="inline-flex items-center space-x-2 bg-white dark:bg-slate-800 text-primary dark:text-primary-dark px-6 py-3 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors font-medium border border-primary dark:border-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
               aria-label="Send email"
             >
               <Mail className="h-5 w-5" />
@@ -68,6 +79,8 @@ export function Hero() {
             </a>
           </div>
         </ScrollReveal>
+        
+        <ResumeModal isOpen={isResumeOpen} onClose={() => setIsResumeOpen(false)} />
       </div>
     </section>
   );

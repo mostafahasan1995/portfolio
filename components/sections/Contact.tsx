@@ -69,11 +69,11 @@ export function Contact() {
                   <span>{personal.email}</span>
                 </a>
                 <a
-                  href={`tel:${personal.phone.secondary}`}
+                  href={`tel:${personal.phone.primary}`}
                   className="flex items-center space-x-3 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary-dark transition-colors"
                 >
                   <Phone className="h-5 w-5" />
-                  <span>{personal.phone.secondary}</span>
+                  <span>{personal.phone.primary}</span>
                 </a>
               </div>
 
