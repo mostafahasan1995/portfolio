@@ -1,14 +1,14 @@
 export const personal = {
   name: "Mostafa Ali Hasan",
   title: "Senior Software Engineer & Team Lead",
-  location: "Beirut, Lebanon",
+  location: "Lebanon - Beirut",
   email: "stevhasan17@gmail.com",
   phone: {
-    primary: "+963930066629",
-    secondary: "+96181514292",
+    primary: "+96181514292",
   },
   linkedin: "https://linkedin.com/in/mostafa-hasan-757688332",
   github: "https://github.com/mostafahasan1995",
-  summary: "Senior Software Engineer with 7 years of experience building enterprise-grade applications and leading high-performing development teams. Specialized in full-stack development with expertise in Node.js, Go, React, and Next.js. Proven track record architecting scalable microservices, delivering production systems, and mentoring engineering teams. Strong background in e-commerce platforms, blockchain integration, and cloud infrastructure.",
+  portfolio: "https://portfolio-six-me.vercel.app/",
+  summary: "Senior Backend Engineer with 7 years of experience specializing in scalable microservices and high-performance systems. Proven team leader with 2+ years managing development teams. Expert in Node.js, Go (Golang), and modern backend technologies. Strong track record delivering production-ready solutions for blockchain, e-commerce, and enterprise applications.",
 };
 

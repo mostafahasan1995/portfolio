@@ -18,7 +18,7 @@ export const skillCategories: SkillCategory[] = [
   },
   {
     name: "DevOps & Cloud",
-    skills: ["Docker", "AWS (EC2, S3, Lambda)", "Git", "CI/CD", "Kubernetes"],
+    skills: ["Docker", "AWS (EC2, S3, Lambda)", "Git", "CI/CD", "Kubernetes", "Vercel", "Cloudflare"],
   },
   {
     name: "APIs",
