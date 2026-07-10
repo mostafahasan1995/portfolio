@@ -11,12 +11,29 @@ export interface Experience {
 
 export const experiences: Experience[] = [
   {
+    company: "L-One Systems GmbH",
+    position: "Senior Full Stack JS Developer",
+    location: "Remote",
+    startDate: "April 2026",
+    endDate: "Present",
+    duration: "3 months",
+    description: "Architecting production-grade, multi-tenant applications with Angular (TypeScript) and NestJS, backed by PostgreSQL and Prisma ORM",
+    achievements: [
+      "Architect and deliver production-grade, multi-tenant applications using Angular (TypeScript) and NestJS",
+      "Build modular, component-driven frontends and scalable REST API backends backed by PostgreSQL and Prisma ORM",
+      "Design tenant-isolated data models and implement row-level security patterns ensuring strict data separation for thousands of users",
+      "Drive full workflow automation by integrating AI agents — connecting GitHub and Notion to automate PR reviews, changelog generation, and documentation",
+      "Champion modular, testable code throughout the monorepo with a strong focus on reliability, security, and performance",
+      "Actively participate in Agile ceremonies and technical meetings, collaborating effectively across cross-functional teams",
+    ],
+  },
+  {
     company: "LARSA Technologies",
     position: "Senior Software Engineer",
     location: "Dubai, UAE (Remote)",
     startDate: "April 2024",
-    endDate: "Present",
-    duration: "1 year 9 months",
+    endDate: "April 2026",
+    duration: "2 years",
     description: "Full-stack development with primary focus on backend architecture using Node.js and Go for enterprise applications",
     achievements: [
       "Full-stack development with primary focus on backend architecture using Node.js and Go for enterprise applications",

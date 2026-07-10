@@ -3,6 +3,7 @@
 import { Project } from "@/data/projects";
 import { Code, ExternalLink } from "lucide-react";
 import { motion } from "framer-motion";
+import { TiltCard } from "@/components/animations/TiltCard";
 
 interface ProjectCardProps {
   project: Project;
@@ -14,56 +15,60 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
     <motion.div
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
-      className="bg-white dark:bg-slate-900 rounded-lg shadow-md p-6 hover:shadow-xl transition-shadow h-full flex flex-col"
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ duration: 0.6, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+      style={{ perspective: 1000 }}
+      className="h-full"
     >
-      <div className="flex items-start justify-between mb-4">
-        <Code className="h-6 w-6 text-primary dark:text-primary-dark" />
-        {project.link && (
-          <a
-            href={project.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-primary dark:text-primary-dark hover:text-blue-700 dark:hover:text-blue-400 transition-colors"
-            aria-label={`Visit ${project.name} live site`}
-          >
-            <ExternalLink className="h-5 w-5" />
-          </a>
-        )}
-      </div>
-
-      <div className="flex items-center justify-between mb-3">
-        <h3 className="text-xl font-bold text-gray-900 dark:text-white">
-          {project.name}
-        </h3>
-        {project.link && (
-          <a
-            href={project.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-xs text-primary dark:text-primary-dark hover:underline font-medium"
-          >
-            Live Site →
-          </a>
-        )}
-      </div>
-
-      <p className="text-gray-600 dark:text-gray-400 mb-4 flex-grow">
-        {project.description}
-      </p>
-
-      <div className="flex flex-wrap gap-2">
-        {project.technologies.map((tech, idx) => (
-          <span
-            key={idx}
-            className="px-3 py-1 bg-blue-100 dark:bg-slate-800 text-primary dark:text-primary-dark rounded-full text-xs font-medium"
-          >
-            {tech}
+      <TiltCard className="glow-border group relative flex h-full flex-col rounded-xl bg-white p-6 shadow-md transition-shadow duration-300 hover:shadow-2xl dark:bg-slate-900">
+        <div className="mb-4 flex items-start justify-between" style={{ transform: "translateZ(40px)" }}>
+          <span className="rounded-lg bg-primary/10 p-2 text-primary transition-transform duration-300 group-hover:scale-110 dark:bg-primary-dark/20 dark:text-primary-dark">
+            <Code className="h-6 w-6" />
           </span>
-        ))}
-      </div>
+          {project.link && (
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary transition-colors hover:text-blue-700 dark:text-primary-dark dark:hover:text-blue-400"
+              aria-label={`Visit ${project.name} live site`}
+            >
+              <ExternalLink className="h-5 w-5" />
+            </a>
+          )}
+        </div>
+
+        <div className="mb-3 flex items-center justify-between" style={{ transform: "translateZ(30px)" }}>
+          <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+            {project.name}
+          </h3>
+          {project.link && (
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="whitespace-nowrap text-xs font-medium text-primary hover:underline dark:text-primary-dark"
+            >
+              Live Site →
+            </a>
+          )}
+        </div>
+
+        <p className="mb-4 flex-grow text-gray-600 dark:text-gray-400">
+          {project.description}
+        </p>
+
+        <div className="flex flex-wrap gap-2" style={{ transform: "translateZ(20px)" }}>
+          {project.technologies.map((tech, idx) => (
+            <span
+              key={idx}
+              className="rounded-full bg-blue-100 px-3 py-1 text-xs font-medium text-primary dark:bg-slate-800 dark:text-primary-dark"
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
+      </TiltCard>
     </motion.div>
   );
 }
-

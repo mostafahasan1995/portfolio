@@ -1,8 +1,8 @@
 "use client";
 
-import { X, Download } from "lucide-react";
-import { personal, experiences, skillCategories, projects, education } from "@/data";
+import { X, Download, Printer } from "lucide-react";
 import { useEffect } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 
 interface ResumeModalProps {
   isOpen: boolean;
@@ -21,38 +21,15 @@ export function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
     };
   }, [isOpen]);
 
-  if (!isOpen) return null;
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    if (isOpen) window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [isOpen, onClose]);
 
   const generateResumeHTML = () => {
-    const skillsHTML = skillCategories
-      .map(
-        (cat) =>
-          `<div class="skills-line"><strong>${cat.name}:</strong> ${cat.skills.join(", ")}</div>`
-      )
-      .join("");
-
-    const experienceHTML = experiences
-      .map(
-        (exp) => `
-      <h3>${exp.position}</h3>
-      <div class="company">${exp.company} | ${exp.location}</div>
-      <div class="date">${exp.startDate} - ${exp.endDate} (${exp.duration})</div>
-      <ul>
-        ${exp.achievements.map((ach) => `<li>${ach}</li>`).join("")}
-      </ul>
-    `
-      )
-      .join("");
-
-    const projectsHTML = projects
-      .map(
-        (proj) => `
-      <div class="project-title">${proj.name}</div>
-      <p>${proj.description}${proj.link ? ` <a href="${proj.link}">View Project</a>` : ""}</p>
-    `
-      )
-      .join("");
-
     return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -64,31 +41,34 @@ export function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #e5e5e5;
-            padding: 20px;
+            background: #eef1f5;
+            padding: 24px 16px;
+            color: #222;
         }
         .btn-bar {
-            max-width: 850px;
-            margin: 0 auto 16px;
+            max-width: 800px;
+            margin: 0 auto 18px;
             text-align: center;
         }
         .btn-bar button {
             background: #1a1a1a;
             color: #fff;
             border: none;
-            padding: 12px 32px;
-            font-size: 15px;
+            padding: 11px 28px;
+            font-size: 14px;
             border-radius: 6px;
             cursor: pointer;
+            transition: background 0.2s;
         }
         .btn-bar button:hover { background: #333; }
         #cv {
-            width: 210mm;
-            min-height: 297mm;
+            width: 100%;
+            max-width: 800px;
             margin: 0 auto;
             background: #fff;
-            padding: 18mm 20mm;
-            box-shadow: 0 0 12px rgba(0,0,0,0.15);
+            padding: 40px 44px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+            border-radius: 8px;
             font-size: 13px;
             color: #222;
             line-height: 1.55;
@@ -117,16 +97,18 @@ export function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
         .skills-line { margin-bottom: 5px; font-size: 12.5px; }
         .skills-line strong { color: #1a1a1a; }
         .project-title { font-weight: bold; font-size: 13px; margin-top: 9px; color: #1a1a1a; }
+        @media (max-width: 640px) {
+            body { padding: 12px 8px; }
+            #cv { padding: 24px 22px; }
+        }
         @media print {
             body { background: white; padding: 0; }
             .btn-bar { display: none; }
-            #cv { box-shadow: none; margin: 0; width: 100%; padding: 15mm; }
+            #cv { box-shadow: none; border-radius: 0; margin: 0; width: 100%; max-width: none; padding: 15mm; }
         }
     </style>
 </head>
 <body>
-
-   
 
     <div id="cv">
 
@@ -284,49 +266,67 @@ export function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
-      <div className="relative w-full max-w-4xl max-h-[90vh] bg-white dark:bg-slate-900 rounded-lg shadow-2xl overflow-hidden flex flex-col">
-        {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-slate-700">
-          <h2 className="text-xl font-bold text-gray-900 dark:text-white">
-            Resume / CV
-          </h2>
-          <div className="flex items-center space-x-2">
-            <button
-              onClick={handleDownload}
-              className="inline-flex items-center space-x-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-700 dark:bg-primary-dark dark:hover:bg-blue-600 transition-colors text-sm font-medium"
-              aria-label="Download Resume"
-            >
-              <Download className="h-4 w-4" />
-              <span>Download</span>
-            </button>
-            <button
-              onClick={handlePrint}
-              className="inline-flex items-center space-x-2 px-4 py-2 bg-gray-200 dark:bg-slate-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-300 dark:hover:bg-slate-600 transition-colors text-sm font-medium"
-              aria-label="Print Resume"
-            >
-              <span>Print</span>
-            </button>
-            <button
-              onClick={onClose}
-              className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors rounded-lg hover:bg-gray-100 dark:hover:bg-slate-800"
-              aria-label="Close Resume"
-            >
-              <X className="h-5 w-5" />
-            </button>
-          </div>
-        </div>
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+          onClick={onClose}
+          className="fixed inset-0 z-[60] flex items-center justify-center bg-black/60 p-2 backdrop-blur-sm sm:p-4"
+        >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+            transition={{ type: "spring", stiffness: 260, damping: 26 }}
+            onClick={(e) => e.stopPropagation()}
+            className="relative flex h-[94vh] w-full max-w-5xl flex-col overflow-hidden rounded-xl bg-white shadow-2xl dark:bg-slate-900"
+          >
+            {/* Header */}
+            <div className="flex items-center justify-between border-b border-gray-200 p-4 dark:border-slate-700">
+              <h2 className="text-xl font-bold text-gray-900 dark:text-white">
+                Resume / CV
+              </h2>
+              <div className="flex items-center space-x-2">
+                <button
+                  onClick={handleDownload}
+                  className="inline-flex items-center space-x-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700 dark:bg-primary-dark dark:hover:bg-blue-600"
+                  aria-label="Download Resume"
+                >
+                  <Download className="h-4 w-4" />
+                  <span className="hidden sm:inline">Download</span>
+                </button>
+                <button
+                  onClick={handlePrint}
+                  className="inline-flex items-center space-x-2 rounded-lg bg-gray-200 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-300 dark:bg-slate-700 dark:text-gray-300 dark:hover:bg-slate-600"
+                  aria-label="Print Resume"
+                >
+                  <Printer className="h-4 w-4" />
+                  <span className="hidden sm:inline">Print</span>
+                </button>
+                <button
+                  onClick={onClose}
+                  className="rounded-lg p-2 text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-slate-800 dark:hover:text-gray-200"
+                  aria-label="Close Resume"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
+            </div>
 
-        {/* Content */}
-        <div className="flex-1 overflow-hidden">
-          <iframe
-            srcDoc={generateResumeHTML()}
-            className="w-full h-full border-0"
-            title="Resume Preview"
-          />
-        </div>
-      </div>
-    </div>
+            {/* Content */}
+            <div className="flex-1 overflow-hidden bg-[#eef1f5]">
+              <iframe
+                srcDoc={generateResumeHTML()}
+                className="h-full w-full border-0"
+                title="Resume Preview"
+              />
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
-

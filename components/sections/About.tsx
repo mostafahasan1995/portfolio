@@ -1,7 +1,15 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { personal } from "@/data";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
+import { Counter } from "@/components/animations/Counter";
+
+const stats = [
+  { value: 7, suffix: "+", label: "Years Experience" },
+  { value: 20, suffix: "+", label: "Projects Delivered" },
+  { value: 5, suffix: "+", label: "Team Members Led" },
+];
 
 export function About() {
   return (
@@ -14,7 +22,7 @@ export function About() {
         </ScrollReveal>
 
         <ScrollReveal delay={0.2}>
-          <div className="w-20 h-1 bg-primary dark:bg-primary-dark mx-auto mb-12"></div>
+          <div className="w-20 h-1 bg-gradient-to-r from-blue-500 via-violet-500 to-cyan-400 mx-auto mb-12 rounded-full"></div>
         </ScrollReveal>
 
         <ScrollReveal delay={0.4}>
@@ -24,24 +32,22 @@ export function About() {
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-              <div className="bg-blue-50 dark:bg-slate-800 p-6 rounded-lg">
-                <div className="text-4xl font-bold text-primary dark:text-primary-dark mb-2">
-                  7+
-                </div>
-                <div className="text-gray-700 dark:text-gray-300">Years Experience</div>
-              </div>
-              <div className="bg-blue-50 dark:bg-slate-800 p-6 rounded-lg">
-                <div className="text-4xl font-bold text-primary dark:text-primary-dark mb-2">
-                  20+
-                </div>
-                <div className="text-gray-700 dark:text-gray-300">Projects Delivered</div>
-              </div>
-              <div className="bg-blue-50 dark:bg-slate-800 p-6 rounded-lg">
-                <div className="text-4xl font-bold text-primary dark:text-primary-dark mb-2">
-                  5+
-                </div>
-                <div className="text-gray-700 dark:text-gray-300">Team Members Led</div>
-              </div>
+              {stats.map((stat, index) => (
+                <motion.div
+                  key={stat.label}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.6, delay: index * 0.15, ease: [0.22, 1, 0.36, 1] }}
+                  whileHover={{ y: -6 }}
+                  className="glow-border group relative overflow-hidden rounded-xl bg-blue-50 p-6 text-center shadow-sm transition-shadow hover:shadow-xl dark:bg-slate-800"
+                >
+                  <div className="mb-2 text-4xl font-bold text-primary dark:text-primary-dark md:text-5xl">
+                    <Counter to={stat.value} suffix={stat.suffix} />
+                  </div>
+                  <div className="text-gray-700 dark:text-gray-300">{stat.label}</div>
+                </motion.div>
+              ))}
             </div>
           </div>
         </ScrollReveal>
@@ -49,4 +55,3 @@ export function About() {
     </section>
   );
 }
-
