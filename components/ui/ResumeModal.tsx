@@ -126,9 +126,7 @@ export function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
 </head>
 <body>
 
-    <div class="btn-bar">
-        <button onclick="downloadPDF()">Download PDF</button>
-    </div>
+   
 
     <div id="cv">
 
