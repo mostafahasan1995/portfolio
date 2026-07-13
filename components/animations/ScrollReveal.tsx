@@ -17,8 +17,8 @@ export function ScrollReveal({
   const directionMap = {
     up: { y: 50, x: 0 },
     down: { y: -50, x: 0 },
-    left: { x: 50, y: 0 },
-    right: { x: -50, y: 0 },
+    left: { x: 24, y: 0 },
+    right: { x: -24, y: 0 },
   };
 
   const initial = directionMap[direction];

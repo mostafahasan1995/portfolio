@@ -30,7 +30,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-primary transition-colors hover:text-blue-700 dark:text-primary-dark dark:hover:text-blue-400"
+              className="-m-2 inline-flex p-2 text-primary transition-colors hover:text-blue-700 dark:text-primary-dark dark:hover:text-blue-400"
               aria-label={`Visit ${project.name} live site`}
             >
               <ExternalLink className="h-5 w-5" />
@@ -47,7 +47,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="whitespace-nowrap text-xs font-medium text-primary hover:underline dark:text-primary-dark"
+              className="-my-2 inline-flex items-center py-2 whitespace-nowrap text-xs font-medium text-primary hover:underline dark:text-primary-dark"
             >
               Live Site →
             </a>

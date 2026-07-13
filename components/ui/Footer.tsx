@@ -41,7 +41,7 @@ export function Footer() {
                 href={personal.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-white rounded"
+                className="p-2 rounded hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-white"
                 aria-label="Visit LinkedIn profile"
               >
                 <Linkedin className="h-6 w-6" />
@@ -50,7 +50,7 @@ export function Footer() {
                 href={personal.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-white rounded"
+                className="p-2 rounded hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-white"
                 aria-label="Visit GitHub profile"
               >
                 <Github className="h-6 w-6" />

@@ -7,7 +7,7 @@ import { Briefcase, Calendar, MapPin } from "lucide-react";
 
 export function Experience() {
   return (
-    <section id="experience" className="py-20 bg-gray-50 dark:bg-slate-800">
+    <section id="experience" className="py-14 sm:py-20 bg-gray-50 dark:bg-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 text-center">
@@ -16,7 +16,7 @@ export function Experience() {
         </ScrollReveal>
 
         <ScrollReveal delay={0.2}>
-          <div className="w-20 h-1 bg-gradient-to-r from-blue-500 via-violet-500 to-cyan-400 mx-auto mb-16 rounded-full"></div>
+          <div className="w-20 h-1 bg-gradient-to-r from-blue-500 via-violet-500 to-cyan-400 mx-auto mb-12 sm:mb-16 rounded-full"></div>
         </ScrollReveal>
 
         <div className="relative mx-auto max-w-4xl">

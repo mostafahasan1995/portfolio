@@ -6,7 +6,7 @@ import { ProjectCard } from "@/components/ui/ProjectCard";
 
 export function Projects() {
   return (
-    <section id="projects" className="py-20 bg-gray-50 dark:bg-slate-800">
+    <section id="projects" className="py-14 sm:py-20 bg-gray-50 dark:bg-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 text-center">

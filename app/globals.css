@@ -14,7 +14,7 @@
   }
 
   body {
-    @apply bg-white dark:bg-slate-900 text-gray-800 dark:text-slate-100 antialiased;
+    @apply overflow-x-hidden bg-white dark:bg-slate-900 text-gray-800 dark:text-slate-100 antialiased;
   }
 
   * {
@@ -90,6 +90,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 /* Respect users who prefer reduced motion */

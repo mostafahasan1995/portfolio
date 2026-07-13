@@ -44,6 +44,8 @@ export function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
             background: #eef1f5;
             padding: 24px 16px;
             color: #222;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
         }
         .btn-bar {
             max-width: 800px;
@@ -72,11 +74,12 @@ export function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
             font-size: 13px;
             color: #222;
             line-height: 1.55;
+            overflow-wrap: break-word;
         }
         h1 { font-size: 26px; color: #1a1a1a; margin-bottom: 3px; }
         .subtitle { font-size: 15px; color: #555; margin-bottom: 10px; }
-        .contact-info { font-size: 13px; color: #444; line-height: 1.7; margin-bottom: 4px; }
-        .contact-info a { color: #0055aa; text-decoration: none; }
+        .contact-info { font-size: 13px; color: #444; line-height: 1.7; margin-bottom: 4px; overflow-wrap: anywhere; }
+        .contact-info a { color: #0055aa; text-decoration: none; overflow-wrap: anywhere; }
         hr { border: none; border-top: 1.5px solid #ccc; margin: 12px 0; }
         h2 {
             font-size: 14px;
@@ -100,6 +103,15 @@ export function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
         @media (max-width: 640px) {
             body { padding: 12px 8px; }
             #cv { padding: 24px 22px; }
+            h1 { font-size: 23px; }
+            .subtitle { font-size: 14px; }
+        }
+        @media (max-width: 400px) {
+            body { padding: 8px 6px; }
+            #cv { padding: 20px 16px; border-radius: 6px; }
+            h1 { font-size: 21px; }
+            h2 { font-size: 13px; }
+            li, p, .skills-line { font-size: 12px; }
         }
         @media print {
             body { background: white; padding: 0; }
@@ -274,7 +286,7 @@ export function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
           onClick={onClose}
-          className="fixed inset-0 z-[60] flex items-center justify-center bg-black/60 p-2 backdrop-blur-sm sm:p-4"
+          className="fixed inset-0 z-[60] flex items-center justify-center bg-black/60 p-0 backdrop-blur-sm sm:p-4"
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
@@ -282,17 +294,17 @@ export function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ type: "spring", stiffness: 260, damping: 26 }}
             onClick={(e) => e.stopPropagation()}
-            className="relative flex h-[94vh] w-full max-w-5xl flex-col overflow-hidden rounded-xl bg-white shadow-2xl dark:bg-slate-900"
+            className="relative flex h-[100dvh] w-full max-w-5xl flex-col overflow-hidden rounded-none bg-white shadow-2xl dark:bg-slate-900 sm:h-[94vh] sm:rounded-xl"
           >
             {/* Header */}
-            <div className="flex items-center justify-between border-b border-gray-200 p-4 dark:border-slate-700">
-              <h2 className="text-xl font-bold text-gray-900 dark:text-white">
+            <div className="flex items-center justify-between gap-2 border-b border-gray-200 p-3 dark:border-slate-700 sm:p-4">
+              <h2 className="truncate text-lg font-bold text-gray-900 dark:text-white sm:text-xl">
                 Resume / CV
               </h2>
-              <div className="flex items-center space-x-2">
+              <div className="flex shrink-0 items-center space-x-1.5 sm:space-x-2">
                 <button
                   onClick={handleDownload}
-                  className="inline-flex items-center space-x-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700 dark:bg-primary-dark dark:hover:bg-blue-600"
+                  className="inline-flex items-center space-x-2 rounded-lg bg-primary px-3 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700 dark:bg-primary-dark dark:hover:bg-blue-600 sm:px-4"
                   aria-label="Download Resume"
                 >
                   <Download className="h-4 w-4" />
@@ -300,7 +312,7 @@ export function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
                 </button>
                 <button
                   onClick={handlePrint}
-                  className="inline-flex items-center space-x-2 rounded-lg bg-gray-200 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-300 dark:bg-slate-700 dark:text-gray-300 dark:hover:bg-slate-600"
+                  className="inline-flex items-center space-x-2 rounded-lg bg-gray-200 px-3 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-300 dark:bg-slate-700 dark:text-gray-300 dark:hover:bg-slate-600 sm:px-4"
                   aria-label="Print Resume"
                 >
                   <Printer className="h-4 w-4" />

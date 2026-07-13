@@ -58,7 +58,7 @@ export function Hero() {
   return (
     <section
       id="home"
-      className="relative flex min-h-screen items-center justify-center overflow-hidden bg-gradient-to-br from-blue-50 via-white to-indigo-50 py-20 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950"
+      className="relative flex min-h-screen items-center justify-center overflow-hidden bg-gradient-to-br from-blue-50 via-white to-indigo-50 py-12 sm:py-20 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950"
     >
       <AnimatedBackground />
 

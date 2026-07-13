@@ -97,7 +97,7 @@ export function Navigation() {
             <ThemeToggle />
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 rounded-lg bg-gray-200 dark:bg-slate-800"
+              className="p-2.5 rounded-lg bg-gray-200 dark:bg-slate-800"
               aria-label="Toggle menu"
             >
               {isMobileMenuOpen ? (
@@ -115,7 +115,7 @@ export function Navigation() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden py-4 space-y-2"
+            className="md:hidden mt-2 py-4 px-2 space-y-2 rounded-xl bg-white/95 backdrop-blur-md shadow-lg dark:bg-slate-900/95"
           >
             {navItems.map((item) => {
               const isActive = activeSection === item.href.slice(1);
