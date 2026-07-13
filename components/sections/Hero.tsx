@@ -66,7 +66,7 @@ export function Hero() {
         variants={container}
         initial="hidden"
         animate="show"
-        className="relative z-10 mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8"
+        className="relative z-10 mx-auto w-full min-w-0 max-w-7xl px-4 text-center sm:px-6 lg:px-8"
       >
         {/* Availability badge */}
         <motion.div variants={item} className="mb-8 flex justify-center">
@@ -81,14 +81,14 @@ export function Hero() {
 
         <motion.h1
           variants={item}
-          className="gradient-text mb-4 text-5xl font-extrabold tracking-tight md:text-7xl lg:text-8xl"
+          className="gradient-text mb-4 break-words text-4xl font-extrabold tracking-tight sm:text-5xl md:text-7xl lg:text-8xl"
         >
           {personal.name}
         </motion.h1>
 
         <motion.h2
           variants={item}
-          className="mb-4 flex flex-wrap items-center justify-center gap-x-3 text-2xl font-semibold text-gray-800 dark:text-gray-100 md:text-4xl"
+          className="mb-4 flex flex-wrap items-center justify-center gap-x-3 text-xl font-semibold text-gray-800 dark:text-gray-100 sm:text-2xl md:text-4xl"
         >
           <span className="text-gray-500 dark:text-gray-400">I build</span>
           <RotatingText words={roles} />
@@ -104,7 +104,7 @@ export function Hero() {
 
         <motion.p
           variants={item}
-          className="mx-auto mb-12 max-w-3xl text-xl text-gray-600 dark:text-gray-400"
+          className="mx-auto mb-12 max-w-3xl text-base text-gray-600 dark:text-gray-400 sm:text-xl"
         >
           Senior Software Engineer &amp; Team Lead crafting scalable enterprise
           solutions with modern technologies.
@@ -112,7 +112,7 @@ export function Hero() {
 
         <motion.div
           variants={item}
-          className="flex flex-wrap items-center justify-center gap-4"
+          className="flex flex-wrap items-center justify-center gap-3 sm:gap-4"
         >
           <Magnetic>
             <button

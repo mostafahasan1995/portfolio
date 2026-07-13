@@ -19,7 +19,7 @@ export function Experience() {
           <div className="w-20 h-1 bg-gradient-to-r from-blue-500 via-violet-500 to-cyan-400 mx-auto mb-12 sm:mb-16 rounded-full"></div>
         </ScrollReveal>
 
-        <div className="relative mx-auto max-w-4xl">
+        <div className="relative mx-auto max-w-4xl overflow-x-clip">
           {/* Animated timeline spine */}
           <motion.div
             initial={{ scaleY: 0 }}
