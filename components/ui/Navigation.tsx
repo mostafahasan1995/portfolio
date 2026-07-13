@@ -1,52 +1,63 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { ThemeToggle } from "./ThemeToggle";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Gamepad2 } from "lucide-react";
 
-const navItems = [
-  { name: "Home", href: "#home" },
-  { name: "About", href: "#about" },
-  { name: "Experience", href: "#experience" },
-  { name: "Skills", href: "#skills" },
-  { name: "Projects", href: "#projects" },
-  { name: "Education", href: "#education" },
-  { name: "Contact", href: "#contact" },
+interface NavItem {
+  name: string;
+  href: string;
+  id: string | null; // section id for scroll-spy, or null for a route link
+}
+
+const navItems: NavItem[] = [
+  { name: "Home", href: "/#home", id: "home" },
+  { name: "About", href: "/#about", id: "about" },
+  { name: "Experience", href: "/#experience", id: "experience" },
+  { name: "Skills", href: "/#skills", id: "skills" },
+  { name: "Projects", href: "/#projects", id: "projects" },
+  { name: "Education", href: "/#education", id: "education" },
+  { name: "Contact", href: "/#contact", id: "contact" },
+  { name: "Arcade", href: "/games", id: null },
 ];
 
 export function Navigation() {
+  const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
+    if (pathname !== "/") return;
     const sections = navItems
-      .map((item) => document.getElementById(item.href.slice(1)))
+      .filter((i) => i.id)
+      .map((i) => document.getElementById(i.id as string))
       .filter((el): el is HTMLElement => el !== null);
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
+          if (entry.isIntersecting) setActiveSection(entry.target.id);
         });
       },
       { rootMargin: "-45% 0px -50% 0px", threshold: 0 }
     );
-
-    sections.forEach((section) => observer.observe(section));
+    sections.forEach((s) => observer.observe(s));
     return () => observer.disconnect();
-  }, []);
+  }, [pathname]);
+
+  const isItemActive = (item: NavItem) => {
+    if (item.id === null) return pathname === item.href;
+    return pathname === "/" && activeSection === item.id;
+  };
 
   return (
     <nav
@@ -59,7 +70,7 @@ export function Navigation() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
-            <a href="#home" className="gradient-text text-xl font-bold">
+            <a href="/#home" className="gradient-text text-xl font-bold">
               Mostafa Hasan
             </a>
           </div>
@@ -67,17 +78,19 @@ export function Navigation() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-6">
             {navItems.map((item) => {
-              const isActive = activeSection === item.href.slice(1);
+              const isActive = isItemActive(item);
+              const isArcade = item.id === null;
               return (
                 <a
                   key={item.name}
                   href={item.href}
-                  className={`relative py-1 text-sm font-medium transition-colors ${
+                  className={`relative flex items-center gap-1 py-1 text-sm font-medium transition-colors ${
                     isActive
                       ? "text-primary dark:text-primary-dark"
                       : "text-gray-700 hover:text-primary dark:text-gray-300 dark:hover:text-primary-dark"
                   }`}
                 >
+                  {isArcade && <Gamepad2 className="h-4 w-4" />}
                   {item.name}
                   {isActive && (
                     <motion.span
@@ -100,11 +113,7 @@ export function Navigation() {
               className="p-2.5 rounded-lg bg-gray-200 dark:bg-slate-800"
               aria-label="Toggle menu"
             >
-              {isMobileMenuOpen ? (
-                <X className="h-5 w-5" />
-              ) : (
-                <Menu className="h-5 w-5" />
-              )}
+              {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
           </div>
         </div>
@@ -118,18 +127,19 @@ export function Navigation() {
             className="md:hidden mt-2 py-4 px-2 space-y-2 rounded-xl bg-white/95 backdrop-blur-md shadow-lg dark:bg-slate-900/95"
           >
             {navItems.map((item) => {
-              const isActive = activeSection === item.href.slice(1);
+              const isActive = isItemActive(item);
               return (
                 <a
                   key={item.name}
                   href={item.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className={`block px-4 py-2 rounded-lg transition-colors ${
+                  className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
                     isActive
                       ? "bg-primary/10 text-primary dark:bg-primary-dark/20 dark:text-primary-dark"
                       : "text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-slate-800"
                   }`}
                 >
+                  {item.id === null && <Gamepad2 className="h-4 w-4" />}
                   {item.name}
                 </a>
               );

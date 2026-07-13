@@ -28,6 +28,9 @@ yarn-error.log*
 .env*.local
 .env
 
+# analytics visit log (local dev)
+/.data
+
 # vercel
 .vercel
 

@@ -3,6 +3,7 @@
 import { X, Download, Printer } from "lucide-react";
 import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { getYearsOfExperience } from "@/lib/experience";
 
 interface ResumeModalProps {
   isOpen: boolean;
@@ -30,6 +31,7 @@ export function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
   }, [isOpen, onClose]);
 
   const generateResumeHTML = () => {
+    const years = getYearsOfExperience();
     return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -136,7 +138,7 @@ export function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
         <hr>
 
         <h2>Professional Summary</h2>
-        <p>Senior Full Stack Developer with over 7 years of experience building scalable, production-grade web applications using modern JavaScript and Python stacks. Proficient in Angular (TypeScript) and React for frontend development, and Node.js, NestJS, and Django (Python) for backend services. Strong expertise in PostgreSQL, relational database design, RESTful API architecture, and microservices. Experienced in Agile/Scrum environments with a strong track record of cross-functional collaboration and delivering multi-tenant enterprise solutions.</p>
+        <p>Senior Full Stack Developer with over ${years} years of experience building scalable, production-grade web applications using modern JavaScript and Python stacks. Proficient in Angular (TypeScript) and React for frontend development, and Node.js, NestJS, and Django (Python) for backend services. Strong expertise in PostgreSQL, relational database design, RESTful API architecture, and microservices. Experienced in Agile/Scrum environments with a strong track record of cross-functional collaboration and delivering multi-tenant enterprise solutions.</p>
 
         <h2>Technical Skills</h2>
         <div class="skills-line"><strong>Backend & Languages:</strong> Node.js, Python (Django, Django REST Framework, FastAPI), Go (Golang), JavaScript (ES6+), TypeScript, Java (Spring Boot)</div>

@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/ui/ThemeProvider";
 import { Navigation } from "@/components/ui/Navigation";
 import { Footer } from "@/components/ui/Footer";
 import { ScrollProgress } from "@/components/animations/ScrollProgress";
+import { VisitTracker } from "@/components/analytics/VisitTracker";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -59,6 +60,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <ScrollProgress />
+          <VisitTracker />
           <Navigation />
           <main className="pt-16">{children}</main>
           <Footer />

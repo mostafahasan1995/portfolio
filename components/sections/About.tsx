@@ -4,14 +4,15 @@ import { motion } from "framer-motion";
 import { personal } from "@/data";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { Counter } from "@/components/animations/Counter";
-
-const stats = [
-  { value: 7, suffix: "+", label: "Years Experience" },
-  { value: 20, suffix: "+", label: "Projects Delivered" },
-  { value: 5, suffix: "+", label: "Team Members Led" },
-];
+import { getYearsOfExperience } from "@/lib/experience";
 
 export function About() {
+  const stats = [
+    { value: getYearsOfExperience(), suffix: "+", label: "Years Experience" },
+    { value: 20, suffix: "+", label: "Projects Delivered" },
+    { value: 5, suffix: "+", label: "Team Members Led" },
+  ];
+
   return (
     <section id="about" className="py-14 sm:py-20 bg-white dark:bg-slate-900">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -27,7 +28,10 @@ export function About() {
 
         <ScrollReveal delay={0.4}>
           <div className="prose prose-lg dark:prose-invert max-w-none">
-            <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
+            <p
+              suppressHydrationWarning
+              className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-6"
+            >
               {personal.summary}
             </p>
 
