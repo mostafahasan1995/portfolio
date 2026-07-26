@@ -6,7 +6,7 @@ import { GraduationCap, Calendar, MapPin } from "lucide-react";
 
 export function Education() {
   return (
-    <section id="education" className="py-14 sm:py-20 bg-white dark:bg-slate-900">
+    <section id="education" className="py-14 sm:py-20 bg-white/75 dark:bg-slate-950/65 backdrop-blur-md">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 text-center">

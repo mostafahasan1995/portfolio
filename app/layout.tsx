@@ -6,6 +6,7 @@ import { Navigation } from "@/components/ui/Navigation";
 import { Footer } from "@/components/ui/Footer";
 import { ScrollProgress } from "@/components/animations/ScrollProgress";
 import { VisitTracker } from "@/components/analytics/VisitTracker";
+import { ThemedBackground } from "@/components/backgrounds/ThemedBackground";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -60,10 +61,15 @@ export default function RootLayout({
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <ScrollProgress />
+          <ThemedBackground />
           <VisitTracker />
           <Navigation />
-          <main className="pt-16">{children}</main>
-          <Footer />
+          {/* Centered content column — leaves big side gaps on large (22"+) screens
+              so the animated background shows through. */}
+          <div className="relative mx-auto w-full max-w-[1600px] shadow-2xl shadow-black/5 dark:shadow-black/40">
+            <main className="pt-16">{children}</main>
+            <Footer />
+          </div>
         </ThemeProvider>
       </body>
     </html>

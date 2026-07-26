@@ -1,5 +1,6 @@
 import { promises as fs } from "fs";
 import path from "path";
+import { hasPostgres, pgInsertVisit, pgReadVisits } from "./db";
 
 /** Compact visit record — short keys keep the JSON file small. */
 export interface Visit {
@@ -22,7 +23,7 @@ function filePath(): string {
   return path.join(process.cwd(), ".data", "visits.json");
 }
 
-export async function readVisits(): Promise<Visit[]> {
+async function readVisitsFile(): Promise<Visit[]> {
   try {
     const raw = await fs.readFile(filePath(), "utf8");
     const data = JSON.parse(raw);
@@ -32,10 +33,29 @@ export async function readVisits(): Promise<Visit[]> {
   }
 }
 
+export async function readVisits(): Promise<Visit[]> {
+  if (hasPostgres()) {
+    try {
+      return await pgReadVisits();
+    } catch {
+      /* fall back to the local file if the DB is unreachable */
+    }
+  }
+  return readVisitsFile();
+}
+
 export async function appendVisit(v: Visit): Promise<void> {
+  if (hasPostgres()) {
+    try {
+      await pgInsertVisit(v); // durable — never deleted
+      return;
+    } catch {
+      /* fall back to the local file if the DB is unreachable */
+    }
+  }
   const fp = filePath();
   await fs.mkdir(path.dirname(fp), { recursive: true });
-  const visits = await readVisits();
+  const visits = await readVisitsFile();
   visits.push(v);
   const capped = visits.slice(-MAX_RECORDS);
   await fs.writeFile(fp, JSON.stringify(capped));

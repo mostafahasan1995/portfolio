@@ -38,6 +38,8 @@ const config: Config = {
         shimmer: "shimmer 2.5s linear infinite",
         "spin-slow": "spin 16s linear infinite",
         "gradient-move": "gradientMove 8s ease infinite",
+        eq: "eq 0.9s ease-in-out infinite alternate",
+        rise: "rise 12s linear infinite",
       },
       keyframes: {
         fadeIn: {
@@ -68,6 +70,16 @@ const config: Config = {
         gradientMove: {
           "0%, 100%": { "background-position": "0% 50%" },
           "50%": { "background-position": "100% 50%" },
+        },
+        eq: {
+          "0%": { transform: "scaleY(0.3)" },
+          "100%": { transform: "scaleY(1)" },
+        },
+        rise: {
+          "0%": { transform: "translateY(0)", opacity: "0" },
+          "10%": { opacity: "1" },
+          "90%": { opacity: "1" },
+          "100%": { transform: "translateY(-115vh)", opacity: "0" },
         },
       },
     },

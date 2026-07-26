@@ -5,7 +5,6 @@ import { motion, type Variants } from "framer-motion";
 import { personal } from "@/data";
 import { Mail, Linkedin, Github, MapPin, FileText, ChevronDown } from "lucide-react";
 import { ResumeModal } from "@/components/ui/ResumeModal";
-import { AnimatedBackground } from "@/components/animations/AnimatedBackground";
 import { RotatingText } from "@/components/animations/RotatingText";
 import { Magnetic } from "@/components/animations/Magnetic";
 import { Marquee } from "@/components/animations/Marquee";
@@ -58,10 +57,8 @@ export function Hero() {
   return (
     <section
       id="home"
-      className="relative flex min-h-screen items-center justify-center overflow-hidden bg-gradient-to-br from-blue-50 via-white to-indigo-50 py-12 sm:py-20 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950"
+      className="relative flex min-h-screen items-center justify-center overflow-hidden py-12 sm:py-20"
     >
-      <AnimatedBackground />
-
       <motion.div
         variants={container}
         initial="hidden"
