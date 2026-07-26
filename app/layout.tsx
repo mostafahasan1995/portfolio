@@ -64,12 +64,8 @@ export default function RootLayout({
           <ThemedBackground />
           <VisitTracker />
           <Navigation />
-          {/* Centered content column — leaves big side gaps on large (22"+) screens
-              so the animated background shows through. */}
-          <div className="relative mx-auto w-full max-w-[1600px] shadow-2xl shadow-black/5 dark:shadow-black/40">
-            <main className="pt-16">{children}</main>
-            <Footer />
-          </div>
+          <main className="pt-16">{children}</main>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>
