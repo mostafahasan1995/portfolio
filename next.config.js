@@ -2,6 +2,11 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  // Keep Prisma out of the server bundle so its query engine binary is included
+  // correctly in Vercel serverless functions.
+  experimental: {
+    serverComponentsExternalPackages: ["@prisma/client", "prisma"],
+  },
   // Only apply webpack watch options in local development (not in Vercel builds)
   webpack: (config, { dev, isServer }) => {
     // Only modify watch options in development on Windows (Vercel uses Linux)

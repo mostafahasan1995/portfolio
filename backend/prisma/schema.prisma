@@ -1,0 +1,30 @@
+// Prisma schema for the portfolio backend.
+// Connection string comes from the DATABASE_URL environment variable:
+//   - locally: defined in .env
+//   - on Vercel: defined in the project's Environment Variables
+// (When using Vercel Postgres, set DATABASE_URL to the pooled connection string.)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/// One recorded visit to the portfolio. Rows are never deleted.
+model Visit {
+  id       Int      @id @default(autoincrement())
+  ts       DateTime @default(now())
+  ip       String?
+  browser  String?
+  os       String?
+  device   String?
+  referrer String?
+  path     String?
+  country  String?
+
+  @@index([ts])
+  @@map("visits")
+}
